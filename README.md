@@ -42,6 +42,8 @@ https://learn.adafruit.com/three-button-foot-switch
 <img src="https://user-images.githubusercontent.com/207897/178125014-8a3d876b-2304-498d-8700-3da9c6ef965d.jpg" width=50% height=50%>
 <img src="https://user-images.githubusercontent.com/207897/178125016-b806a085-701f-437a-9326-495bfbfd06e6.jpg" width=50% height=50%>
 
+Pico mount here: https://github.com/DDRBoxman/picodeck/blob/main/enclosures/pedal/pi-pico-holder.stl
+
 ## Development
 
 ### Building on macOS
