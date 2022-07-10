@@ -1,6 +1,6 @@
 # Picodeck
 
-Firmware to use a Raspberry Pi Pico as a device in Elgato's Stream Deck software.
+Firmware using tinyusb to turn a Raspberry Pi Pico into a device that works with Elgato's Stream Deck software.
 
 <img src="https://user-images.githubusercontent.com/207897/178125108-f3028f94-14cd-44a7-9f3a-7141fb12fb62.jpg" width=35% height=35%>
 
@@ -56,3 +56,34 @@ mkdir build
 cd build
 cmake ..
 ```
+
+## Protocol
+
+The protocol mostly matches the existing Stream Deck devices but with a few tweaks for the pedal.
+
+### Stream Deck Pedal
+
+The pedal has a new command on the output endpoint to set the led color:
+```
+02 0b FF FF FF
+       R  G  B
+```
+
+The input endpoint report for the pedal is shorter than the proper stream decks:
+```
+01 00 03 00 00 00 00 00
+   button:   1  2  3
+```
+
+### Tools
+https://github.com/todbot/mac-hid-dump
+https://eleccelerator.com/usbdescreqparser/
+https://github.com/todbot/hidpytoy
+https://www.wireshark.org
+
+### Resources
+https://github.com/mdonoughe/streamdeck-rs
+https://github.com/RudolfVonKrugstein/streamdeck-hid-rs
+https://github.com/ryankurte/rust-streamdeck
+https://den.dev/blog/reverse-engineering-stream-deck/
+https://gist.github.com/cliffrowley/d18a9c4569537b195f2b1eb6c68469e0
