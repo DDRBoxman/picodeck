@@ -77,13 +77,21 @@ The input endpoint report for the pedal is shorter than the proper stream decks:
 
 ### Tools
 https://github.com/todbot/mac-hid-dump
+
 https://eleccelerator.com/usbdescreqparser/
+
 https://github.com/todbot/hidpytoy
+
 https://www.wireshark.org
 
 ### Resources
 https://github.com/mdonoughe/streamdeck-rs
+
 https://github.com/RudolfVonKrugstein/streamdeck-hid-rs
+
 https://github.com/ryankurte/rust-streamdeck
+
 https://den.dev/blog/reverse-engineering-stream-deck/
+
 https://gist.github.com/cliffrowley/d18a9c4569537b195f2b1eb6c68469e0
+
