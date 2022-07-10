@@ -61,6 +61,12 @@ cmake ..
 
 The protocol mostly matches the existing Stream Deck devices but with a few tweaks for the pedal.
 
+Debugger breakpoints on the RP2040 and wireshark with a real Stream Deck pedal were very helpful at figuring out how the Stream Deck software talks to the devices.
+
+### Startup
+
+When the software starts up it asks the device for a software version number and then a serial string, as long as both of these respond the device shows up in the Stream Deck software.
+
 ### Stream Deck Pedal
 
 The pedal has a new command on the output endpoint to set the led color:
