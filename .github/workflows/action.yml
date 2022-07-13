@@ -19,12 +19,18 @@ jobs:
         - 'keybow'
 
     steps:
+    - name: Install GNU Arm Embedded Toolchain (arm-none-eabi-gcc)
+      uses: carlosperate/arm-none-eabi-gcc-action@v1
+      with:
+        release: '11.2-2022.02'
     - uses: actions/checkout@v3
     - name: Checkout sdk
       run: git submodule update --init pico-sdk
     - name: Checkout pico-sdk submodules
       working-directory: ${{github.workspace}}/pico-sdk
       run: git submodule update --init
+
+    - run: mkdir ${{github.workspace}}/build
       
     - name: Configure CMake
       shell: bash
@@ -40,3 +46,7 @@ jobs:
       shell: bash
       run: cmake --build . --parallel ${{steps.core_count.outputs.output}}
 
+    - uses: actions/upload-artifact@v3
+      with:
+        name: ${{ matrix.hardware }}.uf2
+        path: ${{github.workspace}}/build/*.uf2
