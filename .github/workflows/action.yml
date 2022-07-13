@@ -1,0 +1,42 @@
+name: build
+
+on:
+  pull_request:
+  push:
+  release:
+    types:
+      - created
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        hardware:
+        - 'adapedal'
+        - 'keybow'
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Checkout sdk
+      run: git submodule update --init pico-sdk
+    - name: Checkout pico-sdk submodules
+      working-directory: ${{github.workspace}}/pico-sdk
+      run: git submodule update --init
+      
+    - name: Configure CMake
+      shell: bash
+      working-directory: ${{github.workspace}}/build
+      run: cmake ..
+
+    - name: Get core count
+      id: core_count
+      run : cat /proc/cpuinfo  | grep processor | wc -l
+
+    - name: Build
+      working-directory: ${{github.workspace}}/build
+      shell: bash
+      run: cmake --build . --parallel ${{steps.core_count.outputs.output}}
+
