@@ -25,6 +25,8 @@ jobs:
     - name: Checkout pico-sdk submodules
       working-directory: ${{github.workspace}}/pico-sdk
       run: git submodule update --init
+
+    - run: mkdir ${{github.workspace}}/build
       
     - name: Configure CMake
       shell: bash
