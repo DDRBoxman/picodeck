@@ -50,8 +50,7 @@ Pico mount here: https://github.com/DDRBoxman/picodeck/blob/main/enclosures/peda
 
 ```
 brew tap ArmMbed/homebrew-formulae
-brew install arm-none-eabi
--gcc
+brew install arm-none-eabi-gcc
 mkdir build
 cd build
 cmake ..
