@@ -1,3 +1,6 @@
+# Changes from original
+Made it possible to use while retaining Windows/monitor sleep
+
 # Picodeck
 
 Firmware using tinyusb to turn a Raspberry Pi Pico into a device that works with Elgato's Stream Deck software.
