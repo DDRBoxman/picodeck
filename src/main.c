@@ -126,9 +126,10 @@ void tud_resume_cb(void)
 // tud_hid_report_complete_cb() is used to send the next report after previous one is complete
 void hid_task(void)
 {
-    // Poll every 10ms
+    // Poll every 100ms
     const uint32_t interval_ms = 100;
     static uint32_t start_ms = 0;
+    static uint8_t prev_report[7] = {0}; // Track previous report
 
     if (board_millis() - start_ms < interval_ms)
         return; // not enough time
@@ -139,15 +140,16 @@ void hid_task(void)
         return;
 
     uint8_t report[7] = {0x00, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00};
-
     report[3] = !gpio_get(BUTTON_1_GPIO);
     report[4] = !gpio_get(BUTTON_2_GPIO);
     report[5] = !gpio_get(BUTTON_3_GPIO);
 
-    // send pedal hid report
-    tud_hid_report(1, &report, 7);
+    // Only send the report if there's a change
+    if (memcmp(report, prev_report, sizeof(report)) != 0) {
+        tud_hid_report(1, &report, sizeof(report));
+        memcpy(prev_report, report, sizeof(report));
+    }
 }
-
 // Invoked when sent REPORT successfully to host
 // Application can use this to send the next report
 // Note: For composite reports, report[0] is report ID

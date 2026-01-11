@@ -6,6 +6,7 @@ on:
   release:
     types:
       - created
+  workflow_dispatch:
 
 jobs:
   build:
@@ -46,7 +47,7 @@ jobs:
       shell: bash
       run: cmake --build . --parallel ${{steps.core_count.outputs.output}}
 
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: ${{ matrix.hardware }}.uf2
         path: ${{github.workspace}}/build/*.uf2
